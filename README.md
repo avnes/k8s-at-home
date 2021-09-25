@@ -1,24 +1,41 @@
 # valyria-notes
 
 ```bash
-KUBE_VERSION=1.21
+K8S_VERSION=1.21
+K8S_CLI_VERSION=1.21.5
+K8S_CLUSTER_NAME=valyria
+
+
 K9S_VERSION=0.24.15
 
-sudo snap install microk8s --classic --channel=${KUBE_VERSION}
+sudo snap install microk8s --classic --channel=${K8S_VERSION}
 microk8s status --wait-ready
 microk8s kubectl get nodes
 printf "alias kubectl='microk8s kubectl'\n" >> ~/.bash_aliases
-printf "alias helm='microk8s helm3'\n" >> ~/.bash_aliases
 source ~/.bash_aliases
-microk8s enable dns storage dashboard fluentd helm3
+#microk8s enable dns storage dashboard fluentd helm3
+microk8s enable dns storage
 microk8s enable metallb:192.168.1.240/24
-microk8s enable traefik
-microk8s config > ~/.kube/valyria.config
-KUBECONFIG=~/.kube/valyria.config; export KUBECONFIG
+#microk8s enable traefik
+microk8s config > ~/.kube/${K8S_CLUSTER_NAME}.config
+KUBECONFIG=~/.kube/${K8S_CLUSTER_NAME}.config; export KUBECONFIG
 
-curl -LO https://github.com/derailed/k9s/releases/download/v${K9S_VERSION}/k9s_Linux_x86_64.tar.gz
+curl -LO https://github.com/derailed/k9s/releases/download/v$K9S_VERSION/k9s_Linux_x86_64.tar.gz
 tar zxvf k9s_Linux_x86_64.tar.gz
 sudo cp k9s /usr/local/bin/
+
+curl -o kubectl -L https://dl.k8s.io/release/v$K8S_CLI_VERSION/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin
+
+curl -s https://fluxcd.io/install.sh | sudo bash
+
+export GITHUB_TOKEN=<my-token>
+flux bootstrap github \
+  --owner=avnes \
+  --repository=valyria-flux \
+  --path=clusters/${K8S_CLUSTER_NAME} \
+  --personal
 ```
 
 ## TODO
@@ -27,6 +44,7 @@ The purpose is to use automation to install and configure as much as possible. I
 
 - DONE: Increase RAM from 2GB to 8GB.
 - DONE: Increase vCPU from 1 to 2 cores.
+- Refactor some git repo names
 - Automate installation of Flux CD
 - Automate installation of Traefik with Flux CD
 - Automate installation of Fluentd with Flux CD
