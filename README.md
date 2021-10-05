@@ -53,7 +53,7 @@ The purpose is to use automation to install and configure as much as possible. I
 - DONE: Refactor some git repo names
 - Automate installation of Flux CD
 - Automate installation of Traefik with Flux CD
-- Automate installation of Fluentd with Flux CD
+- Automate installation of Fluent Bit with Flux CD
 - Automate installation of (Bitnami) MetalLB with Flux CD
 - Automate installation of Kubernetes Dashboard with Flux CD
 - Automate installation of Prometheus Blackbox Exporter with Flux CD
@@ -62,6 +62,7 @@ The purpose is to use automation to install and configure as much as possible. I
 - Automate installation of helm, kubectl, k9s and potentially other CLI tools instead of using the ones included with microk8s.
 - Look into Longhorn as storage solution
 - Look into Loki for accessing logs in Grafana
+- Look into Portainer.io
 
 ## CheatSheet virsh
 
