@@ -51,6 +51,7 @@ The purpose is to use automation to install and configure as much as possible. I
 - DONE: Increase RAM from 2GB to 8GB.
 - DONE: Increase vCPU from 1 to 2 cores.
 - DONE: Refactor some git repo names
+- Replace microk8s with k0s
 - Automate installation of Flux CD
 - Automate installation of Traefik with Flux CD
 - Automate installation of Fluent Bit with Flux CD
