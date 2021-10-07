@@ -9,6 +9,14 @@ export K0SCTL_VERSION='0.10.4'
 sudo --preserve-env=K0SCTL_VERSION curl --location --output /usr/local/bin/k0sctl "https://github.com/k0sproject/k0sctl/releases/download/v${K0SCTL_VERSION}/k0sctl-linux-x64"
 sudo chmod +x /usr/local/bin/k0sctl
 
+export KUBECTX_VERSION=0.9.4
+curl --location --output "/tmp/kubectx_v${KUBECTX_VERSION}_linux_x86_64.tar.gz" "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubectx_v${KUBECTX_VERSION}_linux_x86_64.tar.gz"
+cd /tmp
+tar -zxvf kubectx_v${KUBECTX_VERSION}_linux_x86_64.tar.gz
+sudo mv kubectx /usr/local/bin/kubectx
+sudo chmod +x /usr/local/bin/kubectx
+cd -
+
 # Prepare a k0s cluster name
 K0S_CLUSTER=valyria # Or: K0S_CLUSTER=dragonstone
 
