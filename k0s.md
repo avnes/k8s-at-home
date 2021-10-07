@@ -13,10 +13,16 @@ sudo chmod +x /usr/local/bin/k0sctl
 K0S_CLUSTER=valyria # Or: K0S_CLUSTER=dragonstone
 
 # Find VMs private key name and IPs
-cd ~/git/valyria-vm # Or: cd ~/git/terraform-libvirt-vm
-VM_PRIVATE_KEY=$(terraform output --raw ssh_private_key_filename)
-IFS=$'\n' VM_NODES=($(terraform output --json network | jq -r '.[][].addresses | .[]' | sort))
 
+if [[ $K0S_CLUSTER == 'valyria' ]]; then
+    cd ~/git/valyria-vm
+    VM_PRIVATE_KEY=$(terraform output --raw ${K0S_CLUSTER}_vm_ssh_private_key_filename)
+    IFS=$'\n' VM_NODES=($(terraform output --json ${K0S_CLUSTER}_vm_network | jq -r '.[][].addresses | .[]' | sort))
+elif [[ $K0S_CLUSTER == 'dragonstone' ]]; then
+    cd ~/git/terraform-libvirt-vm
+    VM_PRIVATE_KEY=$(terraform output --raw ssh_private_key_filename)
+    IFS=$'\n' VM_NODES=($(terraform output --json network | jq -r '.[][].addresses | .[]' | sort))
+fi
 
 # Create k0s configuration. Lowest IP becomes controller
 k0sctl init --k0s --cluster-name ${K0S_CLUSTER} --user ansible --key-path ${VM_PRIVATE_KEY} ${VM_NODES[@]} > /tmp/k0sctl-${K0S_CLUSTER}.yaml
@@ -26,7 +32,6 @@ k0sctl init --k0s --cluster-name ${K0S_CLUSTER} --user ansible --key-path ${VM_P
 if [[ ${#VM_NODES[@]} -eq 1 ]] ; then
     sed -i 's/^.*role: controller$/    role: "controller+worker"/g' /tmp/k0sctl-${K0S_CLUSTER}.yaml
 fi
-
 
 # Create k0s cluster
 k0sctl apply --config /tmp/k0sctl-${K0S_CLUSTER}.yaml
