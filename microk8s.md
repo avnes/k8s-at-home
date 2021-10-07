@@ -1,5 +1,7 @@
 # microk8s notes
 
+I am no longer using microk8s, but here are the notes I used to manually setup a microk8s cluster on Fedora and CentOS.
+
 ```bash
 K8S_VERSION=1.21
 K8S_CLI_VERSION=1.21.5
