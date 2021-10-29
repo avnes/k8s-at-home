@@ -15,3 +15,18 @@ sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashi
 sudo dnf install -y terraform
 sudo usermod -a -G libvirt $(whoami)
 ```
+
+## libvirt configuration
+
+```bash
+# Check if storage pool called 'default' exist, is started, and has autostart on
+sudo virsh pool-list --all
+
+# Create a storage pool called 'default' if missing
+sudo virsh pool-define-as default dir - - - - "/var/lib/libvirt/images"
+sudo virsh pool-build default
+sudo virsh pool-start default
+sudo virsh pool-autostart default
+sudo virsh pool-list --all
+sudo virsh pool-info default
+```
