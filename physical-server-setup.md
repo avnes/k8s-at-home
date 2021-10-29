@@ -80,5 +80,6 @@ echo "/dev/mapper/cs-data     /data                   xfs     defaults        0 
 ```bash
 sudo dnf install -y dnf-automatic
 sudo sed -i 's/^apply_updates.*/apply_updates = yes/g' /etc/dnf/automatic.conf
+sudo sed -i 's/^upgrade_type.*/upgrade_type = security/g' /etc/dnf/automatic.conf
 sudo systemctl enable --now dnf-automatic.timer
 ```
