@@ -42,6 +42,7 @@ fi
 k0sctl apply --config /tmp/k0sctl-${K0S_CLUSTER}.yaml
 
 # Create KUBECONFIG
+mkdir ~/.kube
 k0sctl kubeconfig --config /tmp/k0sctl-${K0S_CLUSTER}.yaml > ~/.kube/${K0S_CLUSTER}.config
 
 # Test cluster
