@@ -1,0 +1,83 @@
+#!/bin/bash
+
+if [ "${1}" = "dragonlord" ]; then
+   GUEST_IP=192.168.122.210
+   # SSH port forwarding
+   GUEST_PORT=22
+   HOST_PORT=21022
+
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -D FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -I FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+
+   # API server port forwarding
+   GUEST_PORT_API_SVC=6443
+   HOST_PORT_API_SVC=6443
+
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -D FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT_API_SVC -j ACCEPT
+	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT_API_SVC -j DNAT --to $GUEST_IP:$GUEST_PORT_API_SVC
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -I FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT_API_SVC -j ACCEPT
+	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT_API_SVC -j DNAT --to $GUEST_IP:$GUEST_PORT_API_SVC
+   fi
+
+
+fi
+
+if [ "${1}" = "aegon" ]; then
+
+   # SSH port forwarding
+   GUEST_IP=192.168.122.211
+   GUEST_PORT=22
+   HOST_PORT=21122
+
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -D FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -I FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+fi
+
+if [ "${1}" = "rhaenys" ]; then
+
+   # SSH port forwarding
+   GUEST_IP=192.168.122.212
+   GUEST_PORT=22
+   HOST_PORT=21222
+
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -D FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -I FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+fi
+
+if [ "${1}" = "visenya" ]; then
+
+   # SSH port forwarding
+   GUEST_IP=192.168.122.213
+   GUEST_PORT=22
+   HOST_PORT=21322
+
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -D FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+	/sbin/iptables -I FORWARD -o virbr0 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+   fi
+fi
