@@ -29,7 +29,7 @@ spec:
       keyPath: /home/audun/.ssh/valyria.pem
     role: worker
   k0s:
-    version: 1.22.2+k0s.2
+    version: 1.23.3+k0s.1
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: Cluster
