@@ -5,7 +5,7 @@
 unset KUBECONFIG
 
 # Download k0sctl for creating k0s cluster
-export K0SCTL_VERSION='0.11.4'
+export K0SCTL_VERSION='0.12.6'
 sudo --preserve-env=K0SCTL_VERSION curl --location --output /usr/local/bin/k0sctl "https://github.com/k0sproject/k0sctl/releases/download/v${K0SCTL_VERSION}/k0sctl-linux-x64"
 sudo chmod +x /usr/local/bin/k0sctl
 
@@ -42,7 +42,7 @@ fi
 k0sctl apply --config /tmp/k0sctl-${K0S_CLUSTER}.yaml
 
 # Create KUBECONFIG
-mkdir ~/.kube
+mkdir -p ~/.kube
 k0sctl kubeconfig --config /tmp/k0sctl-${K0S_CLUSTER}.yaml > ~/.kube/${K0S_CLUSTER}.config
 
 # Test cluster
