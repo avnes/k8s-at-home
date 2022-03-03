@@ -3,11 +3,10 @@
 ## Misc tools
 
 ```bash
-K8S_VERSION=1.22
-K8S_CLI_VERSION=1.22.3
+K8S_CLI_VERSION=1.23.4
 K8S_CLUSTER_NAME=valyria
 
-K9S_VERSION=0.24.15
+K9S_VERSION=0.25.18
 
 cd /tmp
 curl -LO https://github.com/derailed/k9s/releases/download/v$K9S_VERSION/k9s_Linux_x86_64.tar.gz
