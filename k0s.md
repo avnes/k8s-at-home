@@ -20,12 +20,9 @@ K0S_CLUSTER=valyria # Or: K0S_CLUSTER=dragonstone
 # Find VMs private key name and IPs
 
 if [[ $K0S_CLUSTER == 'valyria' ]]; then
-    cd ~/git/valyria-vmKUBECONFIG=~/.kube/valyria.config; export KUBECONFIG
-source <(kubectl completion bash)
-source <(flux completion bash)
-source <(helm completion bash)
-alias k=kubectl
-complete -F __start_kubectl kput --json ${K0S_CLUSTER}_vm_network | jq -r '.[][].addresses | .[]' | sort))
+    cd ~/git/valyria-vm
+    VM_PRIVATE_KEY=$(terraform output --raw ${K0S_CLUSTER}_vm_ssh_private_key_filename)
+    IFS=$'\n' VM_NODES=($(terraform output --json ${K0S_CLUSTER}_vm_network | jq -r '.[][].addresses | .[]' | sort))
 elif [[ $K0S_CLUSTER == 'dragonstone' ]]; then
     cd ~/git/terraform-libvirt-vm
     VM_PRIVATE_KEY=$(terraform output --raw ssh_private_key_filename)
