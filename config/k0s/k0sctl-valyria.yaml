@@ -5,28 +5,28 @@ metadata:
 spec:
   hosts:
   - ssh:
-      address: 10.0.0.23
+      address: 10.0.1.20
       user: ansible
       port: 22
-      keyPath: /home/audun/.ssh/valyria.pem
+      keyPath: /home/audun/.ssh/k0s.pem
     role: "controller+worker"
   - ssh:
-      address: 10.0.0.20
+      address: 10.0.1.21
       user: ansible
       port: 22
-      keyPath: /home/audun/.ssh/valyria.pem
+      keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   - ssh:
-      address: 10.0.0.22
+      address: 10.0.1.22
       user: ansible
       port: 22
-      keyPath: /home/audun/.ssh/valyria.pem
+      keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   - ssh:
-      address: 10.0.0.21
+      address: 10.0.1.23
       user: ansible
       port: 22
-      keyPath: /home/audun/.ssh/valyria.pem
+      keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   k0s:
     version: 1.24.3+k0s.0
