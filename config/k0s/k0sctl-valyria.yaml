@@ -29,7 +29,7 @@ spec:
       keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   k0s:
-    version: 1.24.3+k0s.0
+    version: 1.24.4+k0s.0
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: Cluster
