@@ -5,31 +5,31 @@ metadata:
 spec:
   hosts:
   - ssh:
-      address: 10.0.1.20
+      address: 192.168.1.120
       user: ansible
       port: 22
       keyPath: /home/audun/.ssh/k0s.pem
     role: "controller+worker"
   - ssh:
-      address: 10.0.1.21
+      address: 192.168.1.121
       user: ansible
       port: 22
       keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   - ssh:
-      address: 10.0.1.22
+      address: 192.168.1.122
       user: ansible
       port: 22
       keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   - ssh:
-      address: 10.0.1.23
+      address: 192.168.1.123
       user: ansible
       port: 22
       keyPath: /home/audun/.ssh/k0s.pem
     role: worker
   k0s:
-    version: 1.24.6+k0s.0
+    version: 1.24.7+k0s.0
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: Cluster
